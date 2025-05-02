@@ -19,6 +19,7 @@ export default function Home() {
     loadUsers();
   };
 
+
   return (
     <div className="container">
       <div className="py-4">
@@ -42,7 +43,7 @@ export default function Home() {
                 <td>{user.username}</td>
                 <td>{user.email}</td>
                 <td>
-                  <button className="btn btn-primary mx-2">View</button>
+                  <Link to={`/viewuser/${user.id}`} className="btn btn-primary mx-2">View</Link>
                   <Link
                     to={`/edituser/${user.id}`}
                     className="btn btn-outline-primary mx-2"
