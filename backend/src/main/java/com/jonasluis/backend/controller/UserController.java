@@ -26,7 +26,8 @@ public class UserController {
 
   @GetMapping("/user/{id}")
   User getUserById(@PathVariable Long id) {
-    return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
+    return userRepository.findById(id).orElseThrow(
+            () -> new UserNotFoundException(id));
   }
 
   @PutMapping("/user/{id}")
@@ -40,5 +41,13 @@ public class UserController {
             }).orElseThrow(() -> new UserNotFoundException(id));
   }
 
+  @DeleteMapping("/user/{id}")
+  String deleteUser(@PathVariable Long id) {
+    if (!userRepository.existsById(id)){
+      throw new UserNotFoundException(id);
+    }
+    userRepository.deleteById(id);
+    return  "User with id " + id + " has been deleted success.";
+  }
 
 }
